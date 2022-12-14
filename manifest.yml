@@ -12,6 +12,6 @@ modules:
       handler: index.handler
 resources:
   - key: main
-    path: static/hello-world/build
+    path: static/issue-panel/build
 app:
   id: ari:cloud:ecosystem::app/3c1c9acf-8fe8-4a0e-86b0-5db633551835
