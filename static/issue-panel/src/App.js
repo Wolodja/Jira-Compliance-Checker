@@ -11,6 +11,12 @@ function App() {
   return (
     <div>
       {data ? data : 'Loading...'}
+      <svg width="100%" height="70px">
+        <g class='bars'>
+          <rect fill="#ff0000" width="100%" height="25%"></rect>
+          <rect fill="#00ff00" width={data + "%"} height="25%"></rect>
+        </g>
+      </svg>
     </div>
   );
 }
