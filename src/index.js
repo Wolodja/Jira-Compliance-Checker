@@ -29,7 +29,19 @@ resolver.define('getText', async (req) => {
 
 resolver.define('getProjectOverview', async (req) => {
     console.log(req);
-    return "Project overview";
+    let jql = `project in (${req.context.extension.project.key})`;
+    const response = await api.asApp().requestJira(route`/rest/api/3/search?jql=${jql}&expand=names&fields=summary,description`)
+    const data = await response.json();
+    let issueScores = [];
+    for (let issue of data.issues){
+        console.log(`Issue ${issue.key}`);
+        issueScores.push({
+            "key": issue.key,
+            "score": getScore(issue)
+        });
+    }
+    console.log(issueScores);
+    return issueScores;
 });
 
 export const handler = resolver.getDefinitions();
